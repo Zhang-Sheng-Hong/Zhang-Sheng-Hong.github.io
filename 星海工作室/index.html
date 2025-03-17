@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星海工作室</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        body {
+            background-color: #fff7ad;
+            font-family: "等线", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+ 
+        /* 加载动画样式 */
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+ 
+        #loader h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+ 
+        /* 主要内容样式 */
+        .content {
+            margin-top: 20px;
+        }
+ 
+        .content h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+ 
+        .content h2 {
+            color: #666;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+ 
+        /* 按钮样式 */
+        .btn {
+            background-color: #fffb7e;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+ 
+        .btn:hover {
+            background-color: #ffe54d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+ 
+        /* 邮箱样式 */
+        .contact-info {
+            margin-top: 30px;
+            color: #666;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div id="loader">
+        <h1>加载中...</h1>
+    </div>
+ 
+    <!-- 主要内容 -->
+    <div class="content">
+        <h1>欢迎来到星海工作室</h1>
+        <h2>访问我们的网站</h2>
+        
+        <!-- 按钮 -->
+        <button class="btn" onclick="window.location='http://localhost/MC/'"> 
+            <h2>[ Hi, Minecrafter! ]</h2>
+        </button>
+
+         <!-- 按钮 -->
+         <button class="btn" onclick="window.location='http://localhost/xinghai+/about/'"> 
+            <h2>[ XINGHAI+ ]</h2>
+        </button>
+
+        <!-- 联系信息 -->
+        <div class="contact-info">
+            邮箱: 17354082936@163.com  
+        </div>
+    </div>
+ 
+    <!-- 加载完成后隐藏加载框 -->
+    <script>
+        window.onload  = function() {
+            document.getElementById('loader').style.display  = 'none';
+        };
+    </script>
+</body>
+</html>
