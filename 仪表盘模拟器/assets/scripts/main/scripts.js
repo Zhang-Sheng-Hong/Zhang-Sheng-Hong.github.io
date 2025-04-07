@@ -7,10 +7,6 @@ function drawAttitudeIndicator(pitch = 0, roll = 0) {
     // 清空画布
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 绘制背景
-    ctx.fillStyle = '#1e1e2f';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
     // 保存上下文状态
     ctx.save();
 
@@ -21,16 +17,16 @@ function drawAttitudeIndicator(pitch = 0, roll = 0) {
     // 绘制地平线
     const horizonOffset = pitch * 2; // 根据俯仰角调整地平线位置
     ctx.fillStyle = '#0077be'; // 天空蓝
-    ctx.fillRect(-canvas.width, -canvas.height / 2 + horizonOffset, canvas.width * 2, canvas.height);
+    ctx.fillRect(-canvas.width * 4, -canvas.height / 2 + horizonOffset, canvas.width * 8, canvas.height); // 扩大绘制区域，避免边界问题
     ctx.fillStyle = '#8b4513'; // 棕色地面
-    ctx.fillRect(-canvas.width, horizonOffset, canvas.width * 2, canvas.height);
+    ctx.fillRect(-canvas.width * 4, horizonOffset, canvas.width * 8, canvas.height); // 扩大绘制区域
 
     // 绘制中心线
     ctx.strokeStyle = '#fff';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(-canvas.width, 0 + horizonOffset);
-    ctx.lineTo(canvas.width, 0 + horizonOffset);
+    ctx.moveTo(-canvas.width * 4, 0 + horizonOffset);
+    ctx.lineTo(canvas.width * 4, 0 + horizonOffset);
     ctx.stroke();
 
     // 恢复上下文状态
@@ -178,11 +174,11 @@ let rollRate = 0; // 滚转角变化率
 function handleInput() {
     document.addEventListener('keydown', (event) => {
         switch (event.key) {
-            case 'w': // 减少俯仰角（向下）
-                pitchRate = 0.1;
+            case 'w': // 增加俯仰角（向上）
+                pitchRate = -0.1; // 修正为负值
                 break;
-            case 's': // 增加俯仰角（向上）
-                pitchRate = -0.1;
+            case 's': // 减少俯仰角（向下）
+                pitchRate = 0.1; // 修正为正值
                 break;
             case 'a': // 增加滚转角（向左）
                 rollRate = -0.1;
@@ -191,10 +187,10 @@ function handleInput() {
                 rollRate = 0.1;
                 break;
             case 'r': // 加速
-                acceleration = 0.5;
+                acceleration = 1; // 增加加速度
                 break;
             case 'f': // 减速
-                acceleration = -0.5;
+                acceleration = -1; // 减少加速度
                 break;
         }
     });
@@ -211,7 +207,7 @@ function handleInput() {
                 break;
             case 'r':
             case 'f':
-                acceleration = 0;
+                acceleration = 0; // 停止加速或减速
                 break;
         }
     });
@@ -219,7 +215,11 @@ function handleInput() {
 
 function simulateData() {
     // 调用物理模拟逻辑（从 physics.js 中引入）
-    simulatePhysics();
+    try {
+        simulatePhysics(); // 确保 simulatePhysics 函数内处理未定义变量
+    } catch (error) {
+        console.error('Error in simulatePhysics:', error);
+    }
 
     // 更新所有仪表数据
     updateAllData(
